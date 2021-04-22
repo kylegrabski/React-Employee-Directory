@@ -18,7 +18,7 @@ function UserCards({ employees }) {
                     alt={item.name.first}
                     className="w-100 card-img-top"
                   />
-                  <div className="p-4">
+                  <div className="p-2">
                     <h5 className="mb-0">{item.name.first} {item.name.last}</h5>
                     <p className="small text-muted">Office - {item.phone}</p>
                     <p className="small text-muted">Mobile - {item.cell}</p>

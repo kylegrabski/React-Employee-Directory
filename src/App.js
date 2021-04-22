@@ -4,8 +4,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "jquery/dist/jquery.slim";
 import "font-awesome/css/font-awesome.min.css";
-import UserCards from "./components/UserCards";
 import API from "./utils/API";
+import UserCards from "./components/UserCards/UserCards";
+import Navbar from "./components/Header/Navbar";
+import JumbotronComp from "./components/Header/Jumbotron"
 
 class App extends Component {
   state = {
@@ -30,6 +32,8 @@ class App extends Component {
     } else
       return (
         <>
+          <Navbar />
+          <JumbotronComp />
           <UserCards employees={this.state.employees} />
         </>
       );

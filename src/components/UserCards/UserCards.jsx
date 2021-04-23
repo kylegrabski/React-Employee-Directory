@@ -1,14 +1,14 @@
 import React from "react";
 import "./style.css";
 
-function UserCards({ employees }) {
+function UserCards({ employees, searchEmployees }) {
   
   //map over employees state from App.js. Id is for unique key on each child.
   return (
     <>
       <div className="container py-5">
         <div className="row pb-5 mb-4 ">
-          {employees.map((item) => {
+          {employees.filter(searchEmployees).map((item) => {
             return (
               <div className="col-lg-3 col-md-6 mb-4 mb-lg-0 " key={item.id}>
                 <div className="card shadow-sm border-0 rounded mb-4 shadow-lg p-3 mb-5">

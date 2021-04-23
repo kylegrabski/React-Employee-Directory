@@ -11,7 +11,7 @@ import JumbotronComp from "./components/Header/Jumbotron"
 
 class App extends Component {
   state = {
-    employees: null,
+    employees: [],
   };
 
   componentDidMount() {
@@ -20,7 +20,16 @@ class App extends Component {
 
   getEmployees = async () => {
     const { data } = await API.getUsers();
-    this.setState({ employees: data.results });
+    const employees = data.results.map((item) => ({
+      id: item.id.value,
+      name:`${item.name.first} ${item.name.last}`,
+      email: item.email,
+      phone: item.phone,
+      state: item.location.state,
+      image: item.picture.large
+    }))
+    console.log(data)
+    this.setState({ employees });
   };
   render() {
     if (this.state.employees === null) {

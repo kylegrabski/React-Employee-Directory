@@ -12,6 +12,7 @@ import JumbotronComp from "./components/Header/Jumbotron"
 class App extends Component {
   state = {
     employees: [],
+    search: ""
   };
 
   componentDidMount() {
@@ -31,19 +32,47 @@ class App extends Component {
     console.log(data)
     this.setState({ employees });
   };
+
+  //search state.employees
+  searchEmployees = (employee) => {
+    if(employee.name.toLowerCase().includes(this.state.search)){
+      return true
+    }
+  }
+
+  handleInputChange = e => {
+    const value = e.target.value;
+    const name = e.target.name;
+    this.setState({
+      // search: value,
+      [name]: value
+    })
+    console.log(value)
+    console.log(this.state.search, "HERE IT IS")
+  }
+
+  // handleFormSubmit = e => {
+  //   e.preventDefault();
+  //   this.searchEmployees(this.state.search)
+  // }
+
   render() {
-    if (this.state.employees === null) {
+    //if user API hasn't put data into state.employees, show Spinner loading. Else render components
+    if (this.state.employees.length === 0) {
       return (
-        <Spinner animation="border" role="status">
-          <span className="sr-only">Loading...</span>
+        <Spinner animation="border" role="status"  >
+          <span className="sr-only"><h2>Loading...</h2></span>
         </Spinner>
       );
     } else
       return (
         <>
-          <Navbar />
+          <Navbar 
+          value={this.state.search}
+          handleInputChange={this.handleInputChange}
+          />
           <JumbotronComp />
-          <UserCards employees={this.state.employees} />
+          <UserCards employees={this.state.employees} searchEmployees={this.searchEmployees} />
         </>
       );
   }

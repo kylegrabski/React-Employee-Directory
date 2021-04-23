@@ -1,7 +1,7 @@
 import React from "react";
 // import styles from './Navbar.module.css'
 
-function Navbar() {
+function Navbar(props) {
   return (
     <>
       <nav className="navbar sticky-top navbar-dark bg-dark shadow-lg p-3 mb-5">
@@ -11,6 +11,9 @@ function Navbar() {
           </a>
           <form className="d-flex input-group w-auto">
             <input
+              onChange={props.handleInputChange}
+              value={props.value}
+              name="search"
               type="search"
               className="form-control"
               placeholder="Search By Name"

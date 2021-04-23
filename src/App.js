@@ -35,7 +35,7 @@ class App extends Component {
 
   //search state.employees
   searchEmployees = (employee) => {
-    if(employee.name.toLowerCase().includes(this.state.search)){
+    if(employee.name.toLowerCase().includes(this.state.search.toLowerCase())){
       return true
     }
   }

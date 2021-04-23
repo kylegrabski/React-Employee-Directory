@@ -4,9 +4,11 @@ import React from "react";
 function Navbar() {
   return (
     <>
-      <nav className="navbar sticky-top navbar-dark bg-dark">
+      <nav className="navbar sticky-top navbar-dark bg-dark shadow-lg p-3 mb-5">
         <div className="container-fluid">
-          <a className="navbar-brand">Navbar</a>
+          <a href="/" className="navbar-brand">
+            TechLink Inc.
+          </a>
           <form className="d-flex input-group w-auto">
             <input
               type="search"

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom"
 import Spinner from "react-bootstrap/Spinner";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -27,10 +28,12 @@ class App extends Component {
       email: item.email,
       phone: item.phone,
       state: item.location.state,
-      image: item.picture.large
+      image: item.picture.large,
+      gender: item.gender
     }))
     console.log(data)
     this.setState({ employees });
+    console.log({employees})
   };
 
   //search state.employees
@@ -51,10 +54,24 @@ class App extends Component {
     console.log(this.state.search, "HERE IT IS")
   }
 
-  // handleFormSubmit = e => {
-  //   e.preventDefault();
-  //   this.searchEmployees(this.state.search)
-  // }
+  
+
+  handleSortByName = (e) => {
+    //create copy of state.employees
+    const copy = [...this.state.employees]
+  
+    console.log("CLICK")
+    //have empty array for names to be pushed in to
+    // let names = [];
+    //iterate through every name and push into array
+    // for (let i = 0; i < copy.length; i++) {
+    //   // console.log(copy[i])
+    //   names.push(copy[i])
+    // }
+    console.log(copy.sort((a, b) => (a.name > b.name) ? 1 : -1))
+    const result = copy.sort((a, b) => (a.name > b.name) ? 1 : -1)
+    return result
+  }
 
   render() {
     //if user API hasn't put data into state.employees, show Spinner loading. Else render components
@@ -71,7 +88,9 @@ class App extends Component {
           value={this.state.search}
           handleInputChange={this.handleInputChange}
           />
-          <JumbotronComp />
+          <JumbotronComp
+          handleSortByName={this.handleSortByName}
+          />
           <UserCards employees={this.state.employees} searchEmployees={this.searchEmployees} />
         </>
       );

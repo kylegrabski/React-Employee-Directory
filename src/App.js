@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom"
 import Spinner from "react-bootstrap/Spinner";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -8,12 +7,14 @@ import "font-awesome/css/font-awesome.min.css";
 import API from "./utils/API";
 import UserCards from "./components/UserCards/UserCards";
 import Navbar from "./components/Header/Navbar";
-import JumbotronComp from "./components/Header/Jumbotron"
+import JumbotronComp from "./components/Header/Jumbotron";
 
 class App extends Component {
   state = {
     employees: [],
-    search: ""
+    search: "",
+    //true = ascending, false = descending
+    sort: true,
   };
 
   componentDidMount() {
@@ -24,76 +25,81 @@ class App extends Component {
     const { data } = await API.getUsers();
     const employees = data.results.map((item) => ({
       id: item.id.value,
-      name:`${item.name.first} ${item.name.last}`,
+      name: `${item.name.first} ${item.name.last}`,
       email: item.email,
       phone: item.phone,
       state: item.location.state,
       image: item.picture.large,
-      gender: item.gender
-    }))
-    console.log(data)
+      gender: item.gender,
+    }));
+
     this.setState({ employees });
-    console.log({employees})
   };
 
   //search state.employees
   searchEmployees = (employee) => {
-    if(employee.name.toLowerCase().includes(this.state.search.toLowerCase())){
-      return true
+    if (employee.name.toLowerCase().includes(this.state.search.toLowerCase())) {
+      return true;
     }
-  }
+  };
 
-  handleInputChange = e => {
+  handleInputChange = (e) => {
     const value = e.target.value;
     const name = e.target.name;
     this.setState({
       // search: value,
-      [name]: value
-    })
-    console.log(value)
-    console.log(this.state.search, "HERE IT IS")
-  }
-
-  
+      [name]: value,
+    });
+  };
 
   handleSortByName = (e) => {
-    //create copy of state.employees
-    const copy = [...this.state.employees]
-  
-    console.log("CLICK")
-    //have empty array for names to be pushed in to
-    // let names = [];
-    //iterate through every name and push into array
-    // for (let i = 0; i < copy.length; i++) {
-    //   // console.log(copy[i])
-    //   names.push(copy[i])
-    // }
-    console.log(copy.sort((a, b) => (a.name > b.name) ? 1 : -1))
-    const result = copy.sort((a, b) => (a.name > b.name) ? 1 : -1)
-    return result
-  }
+    //worked on making a copy and then rendering the UserSearchCards. Couldn't figure it out in time
+    console.log(this.state.sort);
+    const sortEmployees = this.state.employees.sort((a, b) =>
+      a.name > b.name ? 1 : -1
+    );
+    this.setState({ results: sortEmployees });
+    if (this.state.sort == true) {
+      return this.setState({ sort: false }), console.log(sortEmployees);
+    }
+
+    if (this.state.sort == false) {
+      return (
+        this.setState({ sort: true }), console.log(sortEmployees.reverse())
+      );
+    }
+  };
 
   render() {
     //if user API hasn't put data into state.employees, show Spinner loading. Else render components
     if (this.state.employees.length === 0) {
       return (
-        <Spinner animation="border" role="status"  >
-          <span className="sr-only"><h2>Loading...</h2></span>
+        <Spinner animation="border" role="status">
+          <span className="sr-only">
+            <h2>Loading...</h2>
+          </span>
         </Spinner>
       );
-    } else
+    }
+    if (this.state.employees.length) {
       return (
         <>
-          <Navbar 
-          value={this.state.search}
-          handleInputChange={this.handleInputChange}
+          <Navbar
+            value={this.state.search}
+            handleInputChange={this.handleInputChange}
           />
           <JumbotronComp
-          handleSortByName={this.handleSortByName}
+            handleSortByName={this.handleSortByName}
+            getEmployees={this.getEmployees}
           />
-          <UserCards employees={this.state.employees} searchEmployees={this.searchEmployees} />
+          <UserCards
+            employees={this.state.employees}
+            searchEmployees={this.searchEmployees}
+            handleSortByName={this.handleSortByName}
+          />
         </>
       );
+    }
   }
 }
 

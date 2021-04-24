@@ -1,7 +1,7 @@
 import React from "react";
 import { Jumbotron, Button } from "react-bootstrap";
 import "./customJumbotron.css";
-function JumbotronComp({handleSortByName}) {
+function JumbotronComp({handleSortByName, getEmployees}) {
   return (
     <>
       <div className="customJumbotron">
@@ -14,12 +14,14 @@ function JumbotronComp({handleSortByName}) {
             </p>
 
             <p>Search for an employee using the search bar above</p>
-            <Button variant="dark">Load New Employees</Button>
+          </Jumbotron>
+            <Button variant="dark"
+            onClick={getEmployees}
+            >Load New Employees</Button>
          
             <Button variant="dark"
             onClick={handleSortByName}
             >Sort By Name</Button>
-          </Jumbotron>
         </div>
       </div>
     </>

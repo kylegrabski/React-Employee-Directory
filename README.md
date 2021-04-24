@@ -2,7 +2,7 @@
 
 ## Links  
 
-[Deployed App](https://budget-tracker-app1.herokuapp.com/)  
+[Deployed App](https://techlink-employee-directory.netlify.app/)  
 [GitHub Repo](https://github.com/kylegrabski/React-Employee-Directory)  
 
 ## Overview  

@@ -12,11 +12,11 @@ function UserCards({ employees, searchEmployees }) {
             return (
               <div className="col-lg-3 col-md-6 mb-4 mb-lg-0 " key={item.id}>
                 <div className="card shadow-sm border-0 rounded mb-4 shadow-lg p-3 mb-5">
-                  <div className="card-body p-0 ">
+                  <div className="card-body p-0 shadow-lg">
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="w-100 card-img-top"
+                      className="w-100 card-img-top shadow-lg"
                       loading="lazy"
                     />
                     <div className="p-2">

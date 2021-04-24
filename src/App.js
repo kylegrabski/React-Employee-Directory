@@ -54,19 +54,17 @@ class App extends Component {
 
   handleSortByName = (e) => {
     //worked on making a copy and then rendering the UserSearchCards. Couldn't figure it out in time
-
+console.log(this.state.sort)
     const sortEmployees = this.state.employees.sort((a, b) =>
       a.name > b.name ? 1 : -1
     );
     this.setState({ results: sortEmployees });
     if (this.state.sort === true) {
-      return this.setState({ sort: false })
+      return this.setState({ sort: false });
     }
 
     if (this.state.sort === false) {
-      return (
-        this.setState({ sort: true })
-      );
+      return this.setState({ sort: true });
     }
   };
 

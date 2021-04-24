@@ -17,6 +17,7 @@ function UserCards({ employees, searchEmployees }) {
                       src={item.image}
                       alt={item.name}
                       className="w-100 card-img-top"
+                      loading="lazy"
                     />
                     <div className="p-2">
                       <h5 className="mb-0">

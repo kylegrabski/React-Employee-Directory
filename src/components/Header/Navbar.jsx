@@ -19,13 +19,14 @@ function Navbar(props) {
               placeholder="Search By Name"
               aria-label="Search"
             />
-            <button
+            {/* <button
               className="btn btn-outline-primary"
               type="button"
               data-mdb-ripple-color="dark"
             >
-              Search
-            </button>
+              Sort By Name
+            </button> */}
+            
           </form>
         </div>
       </nav>

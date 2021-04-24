@@ -9,11 +9,12 @@ import UserCards from "./components/UserCards/UserCards";
 import Navbar from "./components/Header/Navbar";
 import JumbotronComp from "./components/Header/Jumbotron";
 
-
 class App extends Component {
   state = {
     employees: [],
     search: "",
+    //true = ascending, false = descending
+    sort: true,
   };
 
   componentDidMount() {
@@ -31,9 +32,8 @@ class App extends Component {
       image: item.picture.large,
       gender: item.gender,
     }));
-    console.log(data);
+
     this.setState({ employees });
-    console.log({ employees });
   };
 
   //search state.employees
@@ -54,19 +54,20 @@ class App extends Component {
 
   handleSortByName = (e) => {
     //worked on making a copy and then rendering the UserSearchCards. Couldn't figure it out in time
+    console.log(this.state.sort);
+    const sortEmployees = this.state.employees.sort((a, b) =>
+      a.name > b.name ? 1 : -1
+    );
+    this.setState({ results: sortEmployees });
+    if (this.state.sort == true) {
+      return this.setState({ sort: false }), console.log(sortEmployees);
+    }
 
-    //create copy of state.employees
-    // const copy = [...this.state.employees];
-
-    // console.log("CLICK");
-
-    // console.log(copy.sort((a, b) => (a.name > b.name ? 1 : -1)));
-    // const result = copy.sort((a, b) => (a.name > b.name ? 1 : -1));
-    // return result;
-
-    //set the state instead
-    const sortEmployees = this.state.employees.sort((a, b) => (a.name > b.name ? 1 : -1));
-    this.setState({results: sortEmployees})
+    if (this.state.sort == false) {
+      return (
+        this.setState({ sort: true }), console.log(sortEmployees.reverse())
+      );
+    }
   };
 
   render() {
@@ -87,13 +88,15 @@ class App extends Component {
             value={this.state.search}
             handleInputChange={this.handleInputChange}
           />
-          <JumbotronComp handleSortByName={this.handleSortByName} />
+          <JumbotronComp
+            handleSortByName={this.handleSortByName}
+            getEmployees={this.getEmployees}
+          />
           <UserCards
             employees={this.state.employees}
             searchEmployees={this.searchEmployees}
             handleSortByName={this.handleSortByName}
           />
-       
         </>
       );
     }

@@ -20,3 +20,24 @@ The user can search by name in the search bar. Clicking on the `Load New Employe
 
 ### Tech Used 
 
+>Javascript  
+React
+
+
+### Installation  
+After cloning down the repo, ensure you have `Node.js` installed to install all dependancies. Once Node is on your machine, while in the cloned repo's directory open the integrated terminal and enter the command `npm i` to install all dependancies.  
+
+To run the app locally on your machine, enter the command `npm start` in the integrated terminal.
+
+<br>  
+<br>  
+<br>  
+
+
+For any questions please feel free to reach out to me via email.  
+Thank you  
+
+<br>  
+Kyle Grabski  
+
+kyle.grabski@gmail.com
